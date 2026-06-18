@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Paws & Co.</title>
+	<link rel="icon" type="image/png" href="L.png" sizes="any" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--cream: #f3e3b4;
+			--sage: #73806e;
+			--pink: #dca1a3;
+			--olive: #596856;
+			--beige: #e8d4b5;
+			--white: #ffffff;
+			--shadow: 0 18px 45px rgba(89, 104, 86, 0.12);
+			--shadow-soft: 0 10px 30px rgba(89, 104, 86, 0.1);
+			--radius-xl: 28px;
+			--radius-lg: 22px;
+			--radius-md: 18px;
+			--container: min(1200px, calc(100vw - 40px));
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+			color: var(--olive);
+			background:
+				radial-gradient(circle at top left, rgba(220, 161, 163, 0.22), transparent 26%),
+				radial-gradient(circle at 85% 15%, rgba(115, 128, 110, 0.12), transparent 22%),
+				linear-gradient(180deg, #f7edc9 0%, var(--cream) 100%);
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		img {
+			max-width: 100%;
+			display: block;
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		.container {
+			width: var(--container);
+			margin: 0 auto;
+		}
+
+		.section {
+			padding: 88px 0;
+			position: relative;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 16px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.52);
+			color: var(--sage);
+			font-size: 0.86rem;
+			font-weight: 600;
+			letter-spacing: 0.02em;
+			box-shadow: 0 8px 24px rgba(89, 104, 86, 0.08);
+			backdrop-filter: blur(10px);
+		}
+
+		.eyebrow .paw {
+			font-size: 1rem;
+		}
+
+		.section-title {
+			margin: 18px 0 10px;
+			font-size: clamp(2rem, 4vw, 3.4rem);
+			line-height: 1.02;
+			letter-spacing: -0.04em;
+			color: var(--olive);
+		}
+
+		.section-copy {
+			margin: 0;
+			max-width: 680px;
+			font-size: 1rem;
+			line-height: 1.8;
+			color: rgba(89, 104, 86, 0.84);
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 16px 24px;
+			border: 0;
+			border-radius: 18px;
+			font-weight: 700;
+			font-size: 0.98rem;
+			cursor: pointer;
+			transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+			box-shadow: 0 14px 28px rgba(89, 104, 86, 0.12);
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+		}
+
+		.btn-primary {
+			background: var(--sage);
+			color: var(--white);
+		}
+
+		.btn-secondary {
+			background: rgba(255, 255, 255, 0.7);
+			color: var(--olive);
+			border: 1px solid rgba(89, 104, 86, 0.12);
+		}
+
+		.btn-light {
+			background: var(--white);
+			color: var(--sage);
+		}
+
+		.soft-card {
+			background: rgba(255, 255, 255, 0.72);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			box-shadow: var(--shadow-soft);
+			backdrop-filter: blur(8px);
+		}
+
+		.floating-paw {
+			position: absolute;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			background: rgba(220, 161, 163, 0.12);
+			display: grid;
+			place-items: center;
+			color: rgba(89, 104, 86, 0.42);
+			font-size: 1.35rem;
+			animation: float 7s ease-in-out infinite;
+			pointer-events: none;
+		}
+
+		.floating-paw:nth-child(2n) {
+			animation-duration: 9s;
+		}
+
+		@keyframes float {
+			0%, 100% { transform: translateY(0) rotate(0deg); }
+			50% { transform: translateY(-10px) rotate(4deg); }
+		}
+
+		.blob {
+			position: absolute;
+			border-radius: 999px;
+			filter: blur(2px);
+			opacity: 0.55;
+			pointer-events: none;
+		}
+
+		.blob.cream {
+			background: rgba(232, 212, 181, 0.75);
+		}
+
+		.blob.pink {
+			background: rgba(220, 161, 163, 0.36);
+		}
+
+		.blob.sage {
+			background: rgba(115, 128, 110, 0.18);
+		}
+
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			backdrop-filter: blur(16px);
+			background: rgba(243, 227, 180, 0.78);
+			border-bottom: 1px solid rgba(89, 104, 86, 0.08);
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			padding: 18px 0;
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			color: var(--olive);
+			white-space: nowrap;
+		}
+
+		.brand-logo,
+		.footer-logo,
+		.newsletter-logo,
+		.coupon-logo,
+		.mobile-menu-logo,
+		.loading-logo,
+		.cart-logo {
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			object-position: center;
+			flex: 0 0 auto;
+		}
+
+		.brand-logo {
+			height: 42px;
+			max-width: min(180px, 42vw);
+		}
+
+		.footer-logo {
+			height: 46px;
+			max-width: min(190px, 48vw);
+			margin-bottom: 12px;
+		}
+
+		.newsletter-logo {
+			height: 34px;
+			max-width: min(150px, 36vw);
+		}
+
+		.coupon-logo {
+			height: 30px;
+			max-width: 110px;
+		}
+
+		.mobile-menu-logo {
+			height: 34px;
+			max-width: 140px;
+		}
+
+		.loading-logo {
+			height: 74px;
+			max-width: min(240px, 48vw);
+		}
+
+		.cart-logo {
+			height: 18px;
+			max-width: 48px;
+		}
+
+		.nav-links {
+			display: flex;
+			align-items: center;
+			gap: 26px;
+			font-size: 0.95rem;
+			font-weight: 600;
+			color: rgba(89, 104, 86, 0.9);
+		}
+
+		.nav-links a {
+			position: relative;
+			padding-bottom: 4px;
+		}
+
+		.nav-links a::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 2px;
+			background: var(--sage);
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.25s ease;
+		}
+
+		.nav-links a:hover::after {
+			transform: scaleX(1);
+		}
+
+		.nav-actions {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.icon-btn {
+			width: 42px;
+			height: 42px;
+			border: 0;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.72);
+			color: var(--olive);
+			display: grid;
+			place-items: center;
+			box-shadow: 0 10px 22px rgba(89, 104, 86, 0.08);
+			cursor: pointer;
+			transition: transform 0.2s ease, background 0.2s ease;
+			font-size: 1rem;
+		}
+
+		.icon-btn--cart {
+			padding: 0;
+		}
+
+		.icon-btn--cart img {
+			width: auto;
+			height: 18px;
+			max-width: 20px;
+		}
+
+		.mobile-menu-toggle {
+			display: none;
+		}
+
+		.mobile-drawer {
+			position: fixed;
+			inset: 0;
+			z-index: 70;
+			display: flex;
+			justify-content: flex-end;
+			background: rgba(59, 67, 53, 0.28);
+			backdrop-filter: blur(8px);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.25s ease;
+		}
+
+		.mobile-drawer.is-open {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.mobile-drawer-panel {
+			width: min(86vw, 340px);
+			height: 100%;
+			background: rgba(255, 249, 237, 0.98);
+			box-shadow: -18px 0 40px rgba(89, 104, 86, 0.18);
+			padding: 22px;
+			display: flex;
+			flex-direction: column;
+			gap: 22px;
+		}
+
+		.mobile-drawer-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+		}
+
+		.mobile-drawer-links {
+			display: grid;
+			gap: 14px;
+			font-weight: 700;
+			font-size: 1.02rem;
+		}
+
+		.mobile-drawer-links a {
+			padding: 14px 16px;
+			border-radius: 18px;
+			background: rgba(115, 128, 110, 0.08);
+		}
+
+		.mobile-drawer-actions {
+			margin-top: auto;
+			display: grid;
+			gap: 12px;
+		}
+
+		.loading-screen {
+			position: fixed;
+			inset: 0;
+			z-index: 120;
+			display: grid;
+			place-items: center;
+			background: radial-gradient(circle at top left, rgba(220, 161, 163, 0.22), transparent 26%), linear-gradient(180deg, #f7edc9 0%, var(--cream) 100%);
+			transition: opacity 0.35s ease, visibility 0.35s ease;
+		}
+
+		.loading-screen.is-hidden {
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+		}
+
+		.loading-card {
+			display: grid;
+			justify-items: center;
+			gap: 14px;
+			padding: 28px 34px;
+			border-radius: 28px;
+			background: rgba(255, 255, 255, 0.72);
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(10px);
+		}
+
+		.loading-spinner {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			border: 3px solid rgba(115, 128, 110, 0.18);
+			border-top-color: var(--sage);
+			animation: spin 0.9s linear infinite;
+		}
+
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+
+		.icon-btn:hover {
+			transform: translateY(-2px);
+			background: rgba(255, 255, 255, 0.95);
+		}
+
+		.hero {
+			padding-top: 42px;
+			padding-bottom: 64px;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.03fr 0.97fr;
+			gap: 34px;
+			align-items: center;
+			position: relative;
+		}
+
+		.hero-copy {
+			position: relative;
+			z-index: 2;
+			padding: 22px 0;
+		}
+
+		.hero-title {
+			margin: 20px 0 18px;
+			font-size: clamp(3rem, 6vw, 5.7rem);
+			line-height: 0.96;
+			letter-spacing: -0.07em;
+			color: var(--olive);
+			max-width: 12ch;
+		}
+
+		.hero-title strong {
+			display: inline-block;
+			color: var(--sage);
+		}
+
+		.hero-text {
+			margin: 0 0 28px;
+			max-width: 560px;
+			font-size: 1.08rem;
+			line-height: 1.9;
+			color: rgba(89, 104, 86, 0.84);
+		}
+
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px;
+			align-items: center;
+		}
+
+		.hero-meta {
+			display: flex;
+			gap: 18px;
+			margin-top: 28px;
+			flex-wrap: wrap;
+			color: rgba(89, 104, 86, 0.78);
+			font-size: 0.95rem;
+		}
+
+		.hero-meta span {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.55);
+			box-shadow: 0 8px 20px rgba(89, 104, 86, 0.07);
+		}
+
+		.hero-visual {
+			position: relative;
+			min-height: 680px;
+			display: grid;
+			place-items: center;
+			isolation: isolate;
+		}
+
+		.hero-visual .plate {
+			position: absolute;
+			inset: 48px 0 26px 42px;
+			border-radius: 46px;
+			background:
+				radial-gradient(circle at 24% 16%, rgba(255, 255, 255, 0.58), transparent 20%),
+				radial-gradient(circle at 70% 26%, rgba(220, 161, 163, 0.22), transparent 26%),
+				linear-gradient(145deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.2));
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			box-shadow: var(--shadow);
+			overflow: hidden;
+		}
+
+		.hero-visual .plate::before,
+		.hero-visual .plate::after {
+			content: "";
+			position: absolute;
+			border-radius: 999px;
+			background: rgba(243, 227, 180, 0.75);
+			filter: blur(6px);
+		}
+
+		.hero-visual .plate::before {
+			width: 220px;
+			height: 220px;
+			right: -30px;
+			top: -50px;
+		}
+
+		.hero-visual .plate::after {
+			width: 300px;
+			height: 300px;
+			left: -90px;
+			bottom: -110px;
+			background: rgba(232, 212, 181, 0.45);
+		}
+
+		.kitten-card {
+			position: relative;
+			width: min(520px, 100%);
+			aspect-ratio: 0.92;
+			border-radius: 42px;
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 249, 237, 0.95));
+			box-shadow: 0 24px 56px rgba(89, 104, 86, 0.16);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			overflow: hidden;
+			transform: translateY(16px);
+		}
+
+		.kitten-card img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		.kitten-caption {
+			position: absolute;
+			left: 18px;
+			bottom: 18px;
+			padding: 12px 16px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.78);
+			color: var(--olive);
+			font-weight: 600;
+			font-size: 0.92rem;
+			box-shadow: 0 12px 26px rgba(89, 104, 86, 0.1);
+		}
+
+		.paw-pop {
+			position: absolute;
+			width: 68px;
+			height: 68px;
+			border-radius: 50%;
+			display: grid;
+			place-items: center;
+			background: rgba(255, 255, 255, 0.58);
+			box-shadow: 0 10px 24px rgba(89, 104, 86, 0.09);
+			font-size: 1.8rem;
+			color: rgba(115, 128, 110, 0.72);
+			animation: bob 6s ease-in-out infinite;
+		}
+
+		.paw-pop:nth-child(2n) {
+			animation-duration: 8s;
+		}
+
+		@keyframes bob {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-12px); }
+		}
+
+		.trust-strip {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 16px;
+			margin-top: 10px;
+		}
+
+		.trust-card {
+			padding: 22px 20px;
+			border-radius: 24px;
+			text-align: center;
+			font-weight: 700;
+			color: var(--olive);
+			transition: transform 0.25s ease, box-shadow 0.25s ease;
+		}
+
+		.trust-card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow);
+		}
+
+		.trust-card .icon {
+			display: grid;
+			place-items: center;
+			width: 52px;
+			height: 52px;
+			border-radius: 16px;
+			margin: 0 auto 14px;
+			background: rgba(115, 128, 110, 0.12);
+			font-size: 1.35rem;
+		}
+
+		.section-header {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 20px;
+			margin-bottom: 26px;
+		}
+
+		.section-header .section-copy {
+			max-width: 560px;
+		}
+
+		.categories-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.category-card {
+			position: relative;
+			min-height: 190px;
+			padding: 24px;
+			border-radius: 26px;
+			background: rgba(255, 255, 255, 0.66);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			box-shadow: var(--shadow-soft);
+			overflow: hidden;
+			transition: transform 0.28s ease, box-shadow 0.28s ease;
+		}
+
+		.category-card:hover {
+			transform: translateY(-8px);
+			box-shadow: var(--shadow);
+		}
+
+		.category-card h3 {
+			margin: 0 0 10px;
+			font-size: 1.3rem;
+			line-height: 1.1;
+			color: var(--olive);
+		}
+
+		.category-card p {
+			margin: 0;
+			max-width: 14ch;
+			color: rgba(89, 104, 86, 0.76);
+			font-size: 0.95rem;
+		}
+
+		.category-card svg {
+			position: absolute;
+			right: 16px;
+			bottom: 14px;
+			width: 112px;
+			height: 112px;
+			opacity: 0.95;
+		}
+
+		.products-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.product-card {
+			background: var(--white);
+			border-radius: 26px;
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			transition: transform 0.28s ease, box-shadow 0.28s ease;
+		}
+
+		.product-card:hover {
+			transform: translateY(-6px);
+			box-shadow: var(--shadow);
+		}
+
+		.product-media {
+			aspect-ratio: 1.05;
+			background:
+				radial-gradient(circle at 20% 18%, rgba(220, 161, 163, 0.18), transparent 30%),
+				linear-gradient(145deg, #fbfaf6, #f3ead7);
+			display: grid;
+			place-items: center;
+			padding: 22px;
+		}
+
+		.product-media svg {
+			width: 100%;
+			max-width: 190px;
+		}
+
+		.product-body {
+			padding: 20px;
+		}
+
+		.product-body h3 {
+			margin: 0 0 8px;
+			font-size: 1.05rem;
+			color: var(--olive);
+		}
+
+		.product-row {
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+			align-items: center;
+			margin-bottom: 14px;
+			color: rgba(89, 104, 86, 0.82);
+			font-weight: 600;
+		}
+
+		.rating {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			color: #b67c63;
+			font-size: 0.9rem;
+		}
+
+		.rating span {
+			color: rgba(89, 104, 86, 0.62);
+			font-weight: 600;
+		}
+
+		.product-body .btn {
+			width: 100%;
+			border-radius: 16px;
+			padding: 14px 18px;
+		}
+
+		.promo {
+			overflow: hidden;
+		}
+
+		.promo-banner {
+			position: relative;
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: 22px;
+			align-items: center;
+			padding: 42px;
+			border-radius: 34px;
+			background:
+				radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 24%),
+				linear-gradient(135deg, #6e7b69, #62715f);
+			color: var(--white);
+			box-shadow: var(--shadow);
+		}
+
+		.promo-banner h2 {
+			margin: 0 0 12px;
+			font-size: clamp(2rem, 4vw, 4rem);
+			line-height: 1;
+			letter-spacing: -0.05em;
+		}
+
+		.promo-banner p {
+			margin: 0 0 22px;
+			max-width: 34ch;
+			line-height: 1.8;
+			color: rgba(255, 255, 255, 0.86);
+		}
+
+		.coupon-card {
+			position: relative;
+			justify-self: end;
+			width: min(420px, 100%);
+			aspect-ratio: 1.1;
+			border-radius: 28px;
+			background: linear-gradient(180deg, #fffaf1, #f5ead4);
+			color: var(--olive);
+			box-shadow: 0 26px 54px rgba(41, 50, 40, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			overflow: hidden;
+		}
+
+		.coupon-card::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 84px;
+			height: 84px;
+			background:
+				linear-gradient(135deg, transparent 49%, rgba(255, 255, 255, 0.92) 50%);
+			clip-path: polygon(0 0, 100% 0, 100% 100%);
+		}
+
+		.coupon-card::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 84px;
+			height: 84px;
+			border-left: 1.5px dashed rgba(89, 104, 86, 0.4);
+			border-bottom: 1.5px dashed rgba(89, 104, 86, 0.4);
+			transform: translate(1px, 1px);
+			clip-path: polygon(0 0, 100% 0, 100% 100%);
+			border-radius: 0 28px 0 0;
+		}
+
+		.coupon-inner {
+			padding: 28px;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.coupon-inner .card-top {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+		}
+
+		.coupon-label {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(115, 128, 110, 0.12);
+			font-size: 0.9rem;
+			font-weight: 700;
+		}
+
+		.coupon-title {
+			margin: 18px 0 10px;
+			font-size: 2.2rem;
+			line-height: 0.98;
+			letter-spacing: -0.05em;
+		}
+
+		.coupon-image {
+			width: 100%;
+			border-radius: 22px;
+			background: linear-gradient(135deg, rgba(115, 128, 110, 0.14), rgba(220, 161, 163, 0.18));
+			padding: 12px;
+			display: grid;
+			place-items: center;
+		}
+
+		.values-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.value-card {
+			padding: 24px 22px;
+			border-radius: 24px;
+			text-align: left;
+		}
+
+		.value-card .icon {
+			width: 56px;
+			height: 56px;
+			border-radius: 18px;
+			display: grid;
+			place-items: center;
+			margin-bottom: 18px;
+			background: rgba(115, 128, 110, 0.12);
+			font-size: 1.35rem;
+		}
+
+		.value-card h3 {
+			margin: 0 0 8px;
+			font-size: 1.05rem;
+			color: var(--olive);
+		}
+
+		.value-card p {
+			margin: 0;
+			color: rgba(89, 104, 86, 0.78);
+			line-height: 1.7;
+			font-size: 0.95rem;
+		}
+
+		.testimonials {
+			background: rgba(255, 249, 237, 0.78);
+			border-radius: 44px;
+			padding: 30px;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+		}
+
+		.testimonials-grid {
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: 22px;
+			align-items: stretch;
+		}
+
+		.testimonial-card {
+			padding: 26px;
+			border-radius: 26px;
+			background: rgba(255, 255, 255, 0.78);
+			box-shadow: var(--shadow-soft);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			display: grid;
+			gap: 18px;
+		}
+
+		.speech-bubble {
+			position: relative;
+			padding: 22px 22px 20px;
+			border-radius: 24px;
+			background: var(--white);
+			color: var(--olive);
+			line-height: 1.8;
+			box-shadow: 0 14px 30px rgba(89, 104, 86, 0.08);
+		}
+
+		.speech-bubble::after {
+			content: "";
+			position: absolute;
+			left: 40px;
+			bottom: -12px;
+			width: 24px;
+			height: 24px;
+			background: var(--white);
+			transform: rotate(45deg);
+			border-radius: 4px;
+		}
+
+		.testimonial-meta {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+		}
+
+		.pet-avatar {
+			width: 72px;
+			height: 72px;
+			border-radius: 22px;
+			overflow: hidden;
+			background: linear-gradient(145deg, rgba(115, 128, 110, 0.18), rgba(220, 161, 163, 0.18));
+			flex: 0 0 auto;
+			box-shadow: 0 12px 28px rgba(89, 104, 86, 0.1);
+		}
+
+		.testimonial-meta h4 {
+			margin: 0 0 4px;
+			font-size: 1rem;
+			color: var(--olive);
+		}
+
+		.testimonial-meta p {
+			margin: 0;
+			color: rgba(89, 104, 86, 0.72);
+			font-size: 0.92rem;
+		}
+
+		.testimonial-side {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 16px;
+		}
+
+		.mini-pet {
+			border-radius: 24px;
+			overflow: hidden;
+			position: relative;
+			min-height: 180px;
+			box-shadow: var(--shadow-soft);
+			transition: transform 0.28s ease;
+		}
+
+		.mini-pet:hover {
+			transform: translateY(-4px);
+		}
+
+		.mini-pet svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.instagram-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.insta-card {
+			position: relative;
+			aspect-ratio: 1;
+			border-radius: 26px;
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+			border: 1px solid rgba(89, 104, 86, 0.08);
+			background: linear-gradient(145deg, #faf7ef, #f0e0c4);
+		}
+
+		.insta-card svg {
+			width: 100%;
+			height: 100%;
+			transition: transform 0.4s ease;
+		}
+
+		.insta-card:hover svg {
+			transform: scale(1.08);
+		}
+
+		.newsletter {
+			background: linear-gradient(135deg, rgba(220, 161, 163, 0.9), rgba(219, 155, 158, 0.95));
+			border-radius: 34px;
+			overflow: hidden;
+			color: var(--white);
+			box-shadow: var(--shadow);
+		}
+
+		.newsletter-inner {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 22px;
+			align-items: center;
+			padding: 38px;
+		}
+
+		.newsletter h2 {
+			margin: 0 0 10px;
+			font-size: clamp(2rem, 4vw, 3.2rem);
+			line-height: 1;
+			letter-spacing: -0.05em;
+		}
+
+		.newsletter p {
+			margin: 0;
+			max-width: 42ch;
+			line-height: 1.8;
+			color: rgba(255, 255, 255, 0.88);
+		}
+
+		.newsletter-form {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			justify-content: flex-end;
+			flex-wrap: wrap;
+		}
+
+		.newsletter input {
+			flex: 1 1 260px;
+			min-height: 58px;
+			padding: 0 18px;
+			border-radius: 18px;
+			border: 0;
+			outline: none;
+			background: rgba(255, 255, 255, 0.92);
+			color: var(--olive);
+			font: inherit;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+		}
+
+		.newsletter input::placeholder {
+			color: rgba(89, 104, 86, 0.56);
+		}
+
+		.footer {
+			background: rgba(255, 249, 237, 0.82);
+			border-top-left-radius: 34px;
+			border-top-right-radius: 34px;
+			padding: 64px 0 26px;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+		}
+
+		.footer-grid {
+			display: grid;
+			grid-template-columns: 1.3fr repeat(3, minmax(0, 1fr));
+			gap: 24px;
+			align-items: start;
+		}
+
+		.footer h3 {
+			margin: 0 0 16px;
+			color: var(--olive);
+			font-size: 1.1rem;
+		}
+
+		.footer p,
+		.footer a,
+		.footer li {
+			color: rgba(89, 104, 86, 0.8);
+			line-height: 1.9;
+			font-size: 0.95rem;
+			list-style: none;
+		}
+
+		.footer ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.footer .brand {
+			margin-bottom: 12px;
+			display: inline-flex;
+		}
+
+		.footer-bottom {
+			margin-top: 30px;
+			padding-top: 20px;
+			border-top: 1px solid rgba(89, 104, 86, 0.1);
+			display: flex;
+			justify-content: space-between;
+			gap: 18px;
+			flex-wrap: wrap;
+			color: rgba(89, 104, 86, 0.7);
+			font-size: 0.92rem;
+		}
+
+		.pill-note {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 12px;
+			border-radius: 999px;
+			background: rgba(115, 128, 110, 0.1);
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: var(--olive);
+		}
+
+		.muted {
+			color: rgba(89, 104, 86, 0.78);
+		}
+
+		.reveal {
+			animation: rise 0.7s ease both;
+		}
+
+		.delay-1 { animation-delay: 0.08s; }
+		.delay-2 { animation-delay: 0.16s; }
+		.delay-3 { animation-delay: 0.24s; }
+
+		@keyframes rise {
+			from {
+				opacity: 0;
+				transform: translateY(16px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 1100px) {
+			.nav-links {
+				display: none;
+			}
+
+			.mobile-menu-toggle {
+				display: inline-flex;
+			}
+
+			.hero-grid,
+			.newsletter-inner,
+			.promo-banner,
+			.testimonials-grid,
+			.footer-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-visual {
+				min-height: 560px;
+			}
+
+			.trust-strip,
+			.products-grid,
+			.values-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.categories-grid,
+			.instagram-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.section-header {
+				flex-direction: column;
+				align-items: start;
+			}
+
+			.coupon-card {
+				justify-self: start;
+			}
+		}
+
+		@media (max-width: 720px) {
+			:root {
+				--container: min(100vw - 24px, 1200px);
+			}
+
+			.section {
+				padding: 64px 0;
+			}
+
+			.nav {
+				padding: 16px 0;
+			}
+
+			.brand {
+				gap: 10px;
+			}
+
+			.brand-logo {
+				height: 34px;
+			}
+
+			.footer-logo {
+				height: 40px;
+			}
+
+			.mobile-menu-toggle {
+				width: 42px;
+				height: 42px;
+			}
+
+			.hero-title {
+				font-size: clamp(2.55rem, 14vw, 4rem);
+			}
+
+			.hero-visual {
+				min-height: 470px;
+			}
+
+			.hero-visual .plate {
+				inset: 20px 0 20px 0;
+			}
+
+			.kitten-card {
+				transform: none;
+			}
+
+			.trust-strip,
+			.products-grid,
+			.values-grid,
+			.categories-grid,
+			.instagram-grid,
+			.testimonial-side {
+				grid-template-columns: 1fr;
+			}
+
+			.promo-banner,
+			.newsletter-inner {
+				padding: 28px;
+			}
+
+			.promo-banner h2,
+			.newsletter h2 {
+				font-size: 2.2rem;
+			}
+
+			.coupon-inner {
+				padding: 22px;
+			}
+
+			.coupon-title {
+				font-size: 1.8rem;
+			}
+
+			.footer {
+				border-top-left-radius: 26px;
+				border-top-right-radius: 26px;
+			}
+
+			.footer-bottom {
+				flex-direction: column;
+			}
+
+			.mobile-drawer-panel {
+				width: min(92vw, 340px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="loading-screen" id="loading-screen" aria-hidden="true">
+		<div class="loading-card">
+			<img class="loading-logo" src="L.png" alt="Paws & Co. logo" />
+			<div class="loading-spinner" aria-hidden="true"></div>
+		</div>
+	</div>
+
+	<header class="site-header">
+		<div class="container nav">
+			<a class="brand" href="#home" aria-label="Paws and Co home">
+				<img class="brand-logo" src="L.png" alt="Paws & Co. logo" />
+				<span class="sr-only">Paws &amp; Co.</span>
+			</a>
+
+			<nav class="nav-links" aria-label="Primary navigation">
+				<a href="#home">Home</a>
+				<a href="#shop">Shop</a>
+				<a href="#services">Services</a>
+				<a href="#about">About</a>
+				<a href="#contact">Contact</a>
+			</nav>
+
+			<div class="nav-actions" aria-label="Quick actions">
+				<button class="icon-btn" aria-label="Search">⌕</button>
+				<button class="icon-btn" aria-label="Wishlist">♡</button>
+				<button class="icon-btn icon-btn--cart" aria-label="Cart">
+					<img class="cart-logo" src="L.png" alt="" aria-hidden="true" />
+				</button>
+				<button class="icon-btn" aria-label="User profile">◌</button>
+				<a class="btn btn-primary" href="#services">Book Grooming</a>
+				<button class="icon-btn mobile-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">☰</button>
+			</div>
+		</div>
+		<div class="mobile-drawer" id="mobile-drawer" hidden>
+			<div class="mobile-drawer-panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+				<div class="mobile-drawer-header">
+					<img class="mobile-menu-logo" src="L.png" alt="Paws & Co. logo" />
+					<button class="icon-btn" type="button" aria-label="Close menu">✕</button>
+				</div>
+				<div class="mobile-drawer-links">
+					<a href="#home">Home</a>
+					<a href="#shop">Shop</a>
+					<a href="#services">Services</a>
+					<a href="#about">About</a>
+					<a href="#contact">Contact</a>
+				</div>
+				<div class="mobile-drawer-actions">
+					<a class="btn btn-primary" href="#services">Book Grooming</a>
+					<a class="btn btn-secondary" href="#contact">Newsletter</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main id="home">
+		<section class="hero section">
+			<div class="container hero-grid">
+				<div class="hero-copy reveal">
+					<span class="eyebrow"><span class="paw">🐾</span> Boutique pet essentials with a soft minimal soul</span>
+					<h1 class="hero-title">Everything your furry friend needs, under one roof.</h1>
+					<p class="hero-text">Premium food, toys, grooming essentials and endless love for every wag and every purr.</p>
+					<div class="hero-actions">
+						<a class="btn btn-primary" href="#shop">Shop Now</a>
+						<a class="btn btn-secondary" href="#shop">Claim Free Treat</a>
+					</div>
+					<div class="hero-meta">
+						<span>🌿 Sustainable picks</span>
+						<span>✦ Hand-selected brands</span>
+						<span>🕊️ Same-day local delivery</span>
+					</div>
+				</div>
+
+				<div class="hero-visual reveal delay-1" aria-label="Fluffy orange kitten illustration">
+					<div class="blob cream" style="width: 240px; height: 240px; top: 20px; left: 16px;"></div>
+					<div class="blob pink" style="width: 170px; height: 170px; top: 110px; right: 0;"></div>
+					<div class="blob sage" style="width: 220px; height: 220px; bottom: 34px; left: 6px;"></div>
+					<div class="plate"></div>
+
+					<div class="paw-pop" style="top: 72px; left: 12px;">🐾</div>
+					<div class="paw-pop" style="top: 100px; right: 16px;">🐾</div>
+					<div class="paw-pop" style="bottom: 160px; left: 34px;">🐾</div>
+					<div class="paw-pop" style="bottom: 92px; right: 34px;">🐾</div>
+
+					<div class="kitten-card">
+						<img src="H.jpg" alt="Fluffy orange kitten sitting in a cardboard box" />
+						<div class="kitten-caption">Purrfectly cozy, from box to bow.</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="shop" class="section">
+			<div class="container">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow"><span class="paw">✦</span> Shop by category</span>
+						<h2 class="section-title">Curated essentials with a playful, premium finish.</h2>
+					</div>
+					<p class="section-copy">Thoughtfully selected corners of the shop for every kind of companion, from picky eaters to toy-obsessed explorers.</p>
+				</div>
+
+				<div class="categories-grid">
+					<article class="category-card reveal">
+						<h3>Dog Food</h3>
+						<p>Wholesome meals with clean ingredients.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#e8d4b5" opacity="0.55" />
+							<path d="M55 97c0-14 11-25 25-25h7c14 0 25 11 25 25v14H55V97Z" fill="#73806e" opacity="0.9" />
+							<path d="M62 74c0-11 8-20 18-20h0c10 0 18 9 18 20v9H62v-9Z" fill="#f3e3b4" />
+							<circle cx="80" cy="54" r="16" fill="#dca1a3" opacity="0.68" />
+						</svg>
+					</article>
+					<article class="category-card reveal delay-1">
+						<h3>Cat Essentials</h3>
+						<p>Comfort-led picks for curious cats.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#dca1a3" opacity="0.2" />
+							<path d="M47 92c0-18 15-33 33-33h0c18 0 33 15 33 33v18H47V92Z" fill="#73806e" />
+							<path d="M59 58l15 18-20 10Z" fill="#73806e" />
+							<path d="M101 58l-15 18 20 10Z" fill="#73806e" />
+							<ellipse cx="80" cy="92" rx="18" ry="12" fill="#f3e3b4" />
+						</svg>
+					</article>
+					<article class="category-card reveal delay-2">
+						<h3>Toys</h3>
+						<p>Soft textures and endless chase energy.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#73806e" opacity="0.16" />
+							<path d="M53 101c0-15 12-27 27-27s27 12 27 27v11H53v-11Z" fill="#dca1a3" />
+							<circle cx="80" cy="68" r="16" fill="#f3e3b4" />
+							<path d="M112 54l14-10" stroke="#73806e" stroke-width="6" stroke-linecap="round" />
+							<path d="M124 66l16-3" stroke="#73806e" stroke-width="6" stroke-linecap="round" />
+						</svg>
+					</article>
+					<article class="category-card reveal">
+						<h3>Accessories</h3>
+						<p>Collars, leads and elevated walkwear.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#e8d4b5" opacity="0.7" />
+							<rect x="56" y="50" width="48" height="64" rx="18" fill="#73806e" />
+							<path d="M58 70h44" stroke="#f3e3b4" stroke-width="7" stroke-linecap="round" />
+							<circle cx="80" cy="82" r="10" fill="#dca1a3" />
+						</svg>
+					</article>
+					<article class="category-card reveal delay-1">
+						<h3>Grooming</h3>
+						<p>Soft brushes and spa-like basics.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#dca1a3" opacity="0.18" />
+							<path d="M54 102h52l-8-42H62l-8 42Z" fill="#73806e" />
+							<path d="M64 60h32l-4-10H68l-4 10Z" fill="#f3e3b4" />
+							<path d="M102 68l20-14" stroke="#73806e" stroke-width="6" stroke-linecap="round" />
+						</svg>
+					</article>
+					<article class="category-card reveal delay-2">
+						<h3>Health Care</h3>
+						<p>Daily wellness for peace of mind.</p>
+						<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<circle cx="80" cy="80" r="64" fill="#73806e" opacity="0.13" />
+							<rect x="58" y="52" width="44" height="56" rx="18" fill="#dca1a3" />
+							<path d="M80 60v40M60 80h40" stroke="#fff" stroke-width="8" stroke-linecap="round" />
+						</svg>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="services">
+			<div class="container">
+				<div class="section-header">
+					<div>
+						<span class="eyebrow"><span class="paw">✦</span> Featured picks</span>
+						<h2 class="section-title">Modern favorites for stylish pets and practical humans.</h2>
+					</div>
+					<p class="section-copy">A clean, editorial product grid with soft shadows, rounded corners, and enough breathing room to feel premium.</p>
+				</div>
+
+				<div class="products-grid">
+					<article class="product-card reveal">
+						<div class="product-media">
+							<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<rect x="38" y="58" width="144" height="92" rx="28" fill="#73806e" />
+								<circle cx="110" cy="104" r="30" fill="#f3e3b4" />
+								<path d="M88 88l-18-14M132 88l18-14" stroke="#dca1a3" stroke-width="8" stroke-linecap="round" />
+								<path d="M104 106h12" stroke="#596856" stroke-width="6" stroke-linecap="round" />
+							</svg>
+						</div>
+						<div class="product-body">
+							<h3>Harvest Bowl</h3>
+							<div class="product-row"><span>₹299</span><span class="rating">★★★★★ <span>(124)</span></span></div>
+							<a class="btn btn-primary" href="#contact">Add to Cart</a>
+						</div>
+					</article>
+					<article class="product-card reveal delay-1">
+						<div class="product-media">
+							<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<rect x="64" y="44" width="92" height="132" rx="28" fill="#dca1a3" />
+								<circle cx="110" cy="94" r="28" fill="#fff7e9" />
+								<path d="M90 96h40" stroke="#73806e" stroke-width="7" stroke-linecap="round" />
+								<path d="M110 76v40" stroke="#73806e" stroke-width="7" stroke-linecap="round" />
+							</svg>
+						</div>
+						<div class="product-body">
+							<h3>Calm Kitty Pack</h3>
+							<div class="product-row"><span>₹499</span><span class="rating">★★★★★ <span>(89)</span></span></div>
+							<a class="btn btn-primary" href="#contact">Add to Cart</a>
+						</div>
+					</article>
+					<article class="product-card reveal delay-2">
+						<div class="product-media">
+							<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<rect x="54" y="62" width="112" height="84" rx="24" fill="#e8d4b5" />
+								<circle cx="110" cy="104" r="24" fill="#73806e" />
+								<circle cx="98" cy="100" r="5" fill="#fff" />
+								<circle cx="122" cy="100" r="5" fill="#fff" />
+								<path d="M96 116c8 10 20 10 28 0" stroke="#f3e3b4" stroke-width="6" stroke-linecap="round" fill="none" />
+							</svg>
+						</div>
+						<div class="product-body">
+							<h3>Snuggle Toy Set</h3>
+							<div class="product-row"><span>₹1,299</span><span class="rating">★★★★★ <span>(76)</span></span></div>
+							<a class="btn btn-primary" href="#contact">Add to Cart</a>
+						</div>
+					</article>
+					<article class="product-card reveal delay-3">
+						<div class="product-media">
+							<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<rect x="58" y="56" width="104" height="100" rx="30" fill="#73806e" />
+								<path d="M86 90h48" stroke="#f3e3b4" stroke-width="8" stroke-linecap="round" />
+								<path d="M96 112l12 12 20-26" stroke="#dca1a3" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+							</svg>
+						</div>
+						<div class="product-body">
+							<h3>Everyday Groom Kit</h3>
+							<div class="product-row"><span>₹699</span><span class="rating">★★★★★ <span>(101)</span></span></div>
+							<a class="btn btn-primary" href="#contact">Add to Cart</a>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section promo">
+			<div class="container promo-banner">
+				<div>
+					<span class="eyebrow" style="background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.96);"><span class="paw">✦</span> In-store surprise</span>
+					<h2>Snap. Scan. Treat.</h2>
+					<p>Bring your snap-off coupon and claim a complimentary pet treat in store.</p>
+					<a class="btn btn-light" href="#contact">Learn More</a>
+				</div>
+
+				<div class="coupon-card" aria-label="Perforated coupon business card">
+					<div class="coupon-inner">
+						<div class="card-top">
+								<img class="coupon-logo" src="L.png" alt="Paws & Co. logo" />
+							<div class="pill-note">15% off grooming</div>
+						</div>
+						<div>
+							<div class="coupon-title">Paw-some treat inside.</div>
+							<p class="muted">Show this card at checkout and enjoy a tiny surprise for your best friend.</p>
+						</div>
+						<div class="coupon-image">
+							<svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<rect x="8" y="8" width="264" height="144" rx="24" fill="#fffaf2" />
+								<rect x="34" y="32" width="92" height="96" rx="18" fill="#73806e" opacity="0.9" />
+								<circle cx="84" cy="80" r="26" fill="#f3e3b4" />
+								<path d="M58 58l-10-12M110 58l10-12" stroke="#dca1a3" stroke-width="6" stroke-linecap="round" />
+								<path d="M76 80h16" stroke="#596856" stroke-width="6" stroke-linecap="round" />
+								<path d="M174 46h62M174 72h48M174 98h54" stroke="#73806e" stroke-width="10" stroke-linecap="round" opacity="0.52" />
+							</svg>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="contact">
+			<div class="container newsletter">
+				<div class="newsletter-inner">
+					<div>
+						<span class="eyebrow" style="background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.96);"><img class="newsletter-logo" src="L.png" alt="" aria-hidden="true" /> Newsletter</span>
+						<h2>Stay updated on pawsome offers!</h2>
+						<p>Get first looks at seasonal drops, grooming openings, and exclusive treats for your favorite companions.</p>
+					</div>
+					<form class="newsletter-form">
+						<input type="email" placeholder="Enter your email" aria-label="Email address" />
+						<button class="btn btn-light" type="submit">Subscribe</button>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="container footer-grid">
+			<div>
+				<a class="brand" href="#home"><img class="footer-logo" src="L.png" alt="Paws & Co. logo" /><span class="sr-only">Paws &amp; Co.</span></a>
+				<p>Warm, minimal pet retail with a premium lifestyle feel.</p>
+				<p class="pill-note">Opening Hours: Mon–Sat: 9 AM – 8 PM</p>
+				<p class="pill-note" style="margin-top: 10px;">Sun: 10 AM – 6 PM</p>
+			</div>
+			<div>
+				<h3>Quick Links</h3>
+				<ul>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#shop">Shop</a></li>
+					<li><a href="#services">Services</a></li>
+					<li><a href="#about">About</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Services</h3>
+				<ul>
+					<li>Grooming</li>
+					<li>Delivery</li>
+					<li>Pet Wellness</li>
+					<li>Gift Bundles</li>
+				</ul>
+			</div>
+			<div>
+				<h3>Contact</h3>
+				<ul>
+					<li>hello@pawsandco.com</li>
+						<li>+91 98765 43210</li>
+						<li>Location: Balawala, Dehradun, Uttarakhand, India</li>
+				</ul>
+				<h3 style="margin-top: 22px;">Social Media</h3>
+				<ul>
+					<li>Instagram</li>
+					<li>Pinterest</li>
+					<li>TikTok</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container footer-bottom">
+			<span>Made with 🐾 and lots of love.</span>
+			<span>Premium pet essentials for modern companions.</span>
+		</div>
+	</footer>
+
+	<script>
+		const loadingScreen = document.getElementById('loading-screen');
+		const mobileDrawer = document.getElementById('mobile-drawer');
+		const openMenuButton = document.querySelector('.mobile-menu-toggle');
+		const closeMenuButton = document.querySelector('.mobile-drawer .icon-btn[aria-label="Close menu"]');
+
+		const openMenu = () => {
+			mobileDrawer.hidden = false;
+			requestAnimationFrame(() => mobileDrawer.classList.add('is-open'));
+			openMenuButton.setAttribute('aria-expanded', 'true');
+		};
+
+		const closeMenu = () => {
+			mobileDrawer.classList.remove('is-open');
+			openMenuButton.setAttribute('aria-expanded', 'false');
+			window.setTimeout(() => {
+				mobileDrawer.hidden = true;
+			}, 250);
+		};
+
+		if (openMenuButton && mobileDrawer && closeMenuButton) {
+			openMenuButton.addEventListener('click', openMenu);
+			closeMenuButton.addEventListener('click', closeMenu);
+			mobileDrawer.addEventListener('click', event => {
+				if (event.target === mobileDrawer) {
+					closeMenu();
+				}
+			});
+			mobileDrawer.querySelectorAll('a').forEach(link => {
+				link.addEventListener('click', closeMenu);
+			});
+		}
+
+		const hideLoadingScreen = () => {
+			if (!loadingScreen) {
+				return;
+			}
+
+			loadingScreen.classList.add('is-hidden');
+			window.setTimeout(() => {
+				loadingScreen.hidden = true;
+			}, 350);
+		};
+
+		window.addEventListener('load', () => {
+			window.setTimeout(hideLoadingScreen, 700);
+		});
+
+		window.setTimeout(hideLoadingScreen, 2200);
+	</script>
+</body>
+</html>
